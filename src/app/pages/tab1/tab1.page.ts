@@ -18,8 +18,15 @@ export class Tab1Page implements OnInit {
 
   }
 
-  siguientes(event?) {
-    this.postsService.getPosts()
+  recargar(event) {
+    this.siguientes(event, true);
+    this.posts = [];
+
+  }
+
+  siguientes(event?, pull: boolean = false) {
+
+    this.postsService.getPosts( pull )
     .subscribe(resp => {
       console.log(resp);
       this.posts.push(...resp.posts);
