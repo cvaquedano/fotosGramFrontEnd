@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Storage } from '@ionic/storage';
 import { Usuario } from '../interfaces/interfaces';
 import { NavController } from '@ionic/angular';
+import { async } from '@angular/core/testing';
 
 
 const URL = environment.url;
@@ -29,11 +30,11 @@ export class UsuarioService {
     return new Promise(resolve => {
 
       this.http.post(`${URL}/user/login`, data)
-      .subscribe(respuesta => {
+      .subscribe(async respuesta => {
         console.log(respuesta);
 
         if ( respuesta['ok']) {
-          this.guardarToken(respuesta['token']);
+          await this.guardarToken(respuesta['token']);
           resolve(true);
         } else {
           this.token = null;
@@ -47,14 +48,21 @@ export class UsuarioService {
 
   }
 
+  logout() {
+    this.token = null;
+    this.usuario =  null;
+    this.storage.clear();
+    this.navCtrl.navigateRoot('/login', {animated: true});
+  }
+
   registro(usuario: Usuario) {
     return new Promise(resolve => {
       this.http.post(`${URL}/user/create`, usuario)
-      .subscribe(respuesta => {
+      .subscribe(async respuesta => {
         console.log(respuesta);
 
         if ( respuesta['ok']) {
-          this.guardarToken(respuesta['token']);
+          await this.guardarToken(respuesta['token']);
           resolve(true);
         } else {
           this.token = null;
@@ -73,6 +81,7 @@ export class UsuarioService {
 
     this.token = token;
     await this.storage.set('token', token);
+    await this.validaToken();
   }
 
   async cargarToken() {

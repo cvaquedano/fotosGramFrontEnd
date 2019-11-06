@@ -35,6 +35,8 @@ export class Tab2Page {
     posicion: false
     };
 
+    this.tempImages = [];
+
     this.ruote.navigateByUrl('/main/tabs/tab1');
 
   }
@@ -91,7 +93,7 @@ export class Tab2Page {
       // If it's base64 (DATA_URL):
       // let base64Image = 'data:image/jpeg;base64,' + imageData;
      const img = window.Ionic.WebView.convertFileSrc(imageData);
- 
+     this.postService.subirImagen(imageData);
      this.tempImages.push(img);
      }, (err) => {
       // Handle error
