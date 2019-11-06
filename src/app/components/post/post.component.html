@@ -8,7 +8,7 @@
       <h5>{{post.usuario.email}}</h5>
     </ion-label>
   </ion-item>
-
+<!-- 
   <ion-slides mode="md" pager="md">
 
     <ion-slide class="image-slide"
@@ -22,7 +22,10 @@
   [style]="img3 | domSanitizer"
  ></ion-slide>
 
-  </ion-slides>
+  </ion-slides> -->
+  <app-mapa [coords]="post.coords">
+
+  </app-mapa>
 
   <ion-item lines=none>
    <ion-icon slot="start" name="heart-empty"></ion-icon>

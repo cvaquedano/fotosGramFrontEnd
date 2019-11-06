@@ -15,7 +15,7 @@ import { Usuario } from 'src/app/interfaces/interfaces';
 })
 export class LoginPage implements OnInit {
 
-  @ViewChild('slidePrincipal') slides: IonSlides;
+  @ViewChild('slidePrincipal', {static: true}) slides: IonSlides;
 
 
 
