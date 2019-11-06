@@ -17,7 +17,7 @@ export class UiServiceService {
 
     await alert.present();
   }
-
+  
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message,
